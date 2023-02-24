@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  php:
+    build:
+      context: _docker/php/dev
+    env_file:
+      - _env/php.env
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./_docker/php/dev/base.ini:/usr/local/etc/php/conf.d/base.ini
+      - ./:/app
