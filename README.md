@@ -1,5 +1,24 @@
 # Translate
 
+## Features
+
+- Import Google Spreadsheet stored language keys to `.json` files.
+
+## Basic usage
+
+### Import from Google Spreadsheet
+1. Create `keys` folder and create Google credentials json file.
+2. Create `export` folder (This folder will contain the language json files.)
+3. Customize and Run the following script:
+```
+docker run -u 1000 --rm --tty \
+-e "GOOGLE_CREDENTIALS_FILENAME=GoogleCredentials.json" \
+-e "APP_ENV=prod" \
+-v /path/to/keys:/app/var/keys \
+-v /path/to/export:/app/var/export \
+aventailltd/translate:20230227 php cli.php import:google-spreadsheet "1a3bVZkaGq5R631LTDx7hOGsdIA4LuxlHVl-pWNFE1J4" "A3:F" "hu,en,de,ro,ru" --separate
+```
+
 ## Install Dev (Docker)
 
 1. Set environments with te following examples files
