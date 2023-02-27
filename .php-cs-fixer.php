@@ -8,8 +8,6 @@ use PhpCsFixer\Finder;
 // https://symfony.com/doc/current/components/finder.html
 $finder = Finder::create()
     ->in('src')
-    ->in('public')
-    ->in('db')
     ->in('config')
     ->name('*.php')
     ->name('_ide_helper');

@@ -28,6 +28,11 @@ cp /path/to/YourGoogleCredentials.json var/keys/YourGoogleCredentials.json
 chmod 600 var/keys/YourGoogleCredentials.json
 ```
 
+5. Try import from Google Spreadsheet
+
+```bash
+docker-compose run --rm -u 1000 php php cli.php import:google-spreadsheet "1a3bVZkaGq5R631LTDx7hOGsdIA4LuxlHVl-pWNFE1J4" "A3:F" "hu,en,de,ro,ru"
+```
 ## PHP CS Fixer
 
 ```bash

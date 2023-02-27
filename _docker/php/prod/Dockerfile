@@ -38,6 +38,10 @@ COPY cli.php /app
 RUN mkdir -p /app/var/keys
 VOLUME /app/var/keys
 
+# Create export folder
+RUN mkdir -p /app/var/export
+VOLUME /app/var/export
+
 ARG wwwdatauid=1000
 RUN usermod -u $wwwdatauid www-data
 RUN chown -R www-data:www-data /app

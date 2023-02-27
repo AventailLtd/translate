@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use DI\ContainerBuilder;
 use Monolog\ErrorHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -27,3 +28,13 @@ $errorHandler = new ErrorHandler($logger);
 $errorHandler->registerErrorHandler([], false);
 $errorHandler->registerExceptionHandler([], false);
 $errorHandler->registerFatalHandler();
+
+// Container building and dependency injection:
+$containerBuilder = new ContainerBuilder();
+if ($settings['di_compilation_path'] !== null) {
+    $containerBuilder->enableCompilation($settings['di_compilation_path']);
+}
+
+(require __DIR__ . '/dependencies.php')($containerBuilder, $settings, $logger);
+
+return $containerBuilder->build();
