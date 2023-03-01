@@ -2,12 +2,13 @@
 
 declare(strict_types = 1);
 
+use App\Settings;
 use DI\ContainerBuilder;
 use Psr\Log\LoggerInterface;
 
-return static function (ContainerBuilder $containerBuilder, array $settings, LoggerInterface $logger) {
+return static function (ContainerBuilder $containerBuilder, Settings $settings, LoggerInterface $logger) {
     $containerBuilder->addDefinitions([
-        'settings' => $settings,
+        Settings::class => $settings,
         LoggerInterface::class => $logger,
     ]);
 };

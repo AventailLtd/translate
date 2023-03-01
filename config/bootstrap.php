@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use App\Settings;
 use DI\ContainerBuilder;
 use Monolog\ErrorHandler;
 use Monolog\Handler\StreamHandler;
@@ -10,15 +11,13 @@ use Monolog\Processor\UidProcessor;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$settings = (require __DIR__ . '/settings.php')(
-    $_ENV['APP_ENV'] ?? 'dev'
-);
+$settings = new Settings($_ENV['APP_ENV'] ?? 'dev');
 
 // Create PSR-3 logger:
-$logger = new Logger($settings['logger']['name']);
+$logger = new Logger($settings->getLogger()['name']);
 $processor = new UidProcessor();
 $logger->pushProcessor($processor);
-$handler = new StreamHandler($settings['logger']['path'], $settings['logger']['level']);
+$handler = new StreamHandler($settings->getLogger()['path'], $settings->getLogger()['level']);
 $logger->pushHandler($handler);
 
 // Error handling:
@@ -31,8 +30,8 @@ $errorHandler->registerFatalHandler();
 
 // Container building and dependency injection:
 $containerBuilder = new ContainerBuilder();
-if ($settings['di_compilation_path'] !== null) {
-    $containerBuilder->enableCompilation($settings['di_compilation_path']);
+if ($settings->getDiCompilationPath() !== null) {
+    $containerBuilder->enableCompilation($settings->getDiCompilationPath());
 }
 
 (require __DIR__ . '/dependencies.php')($containerBuilder, $settings, $logger);

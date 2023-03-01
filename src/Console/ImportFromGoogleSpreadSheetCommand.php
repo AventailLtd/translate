@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Console;
 
+use App\Settings;
 use Google\Service\Sheets;
 use Google_Client;
 use Symfony\Component\Console\Command\Command;
@@ -17,7 +18,7 @@ class ImportFromGoogleSpreadSheetCommand extends Command
     protected static $defaultName = 'import:google-spreadsheet';
     protected static $defaultDescription = 'Import translate keys from Google Spreadsheets';
 
-    public function __construct(protected array $settings, string $name = null)
+    public function __construct(protected Settings $settings, string $name = null)
     {
         parent::__construct($name);
     }
@@ -47,7 +48,7 @@ class ImportFromGoogleSpreadSheetCommand extends Command
         $langList = $input->getArgument('lang-list');
         $isSeparateMode = $input->getOption('separate');
 
-        $credentialsFile = $this->settings['google']['credentials_file'];
+        $credentialsFile = $this->settings->getGoogle()['credentials_file'];
 
         if (!file_exists($credentialsFile)) {
             throw new \LogicException('Credentials file not found: ' . $credentialsFile);
@@ -75,7 +76,7 @@ class ImportFromGoogleSpreadSheetCommand extends Command
             }
         }
 
-        $exportDir = $this->settings['export_dir'];
+        $exportDir = $this->settings->getExportDir();
 
         // Create dir if not exists.
         if (!is_dir($exportDir)) {
