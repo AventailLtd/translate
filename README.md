@@ -28,7 +28,7 @@ aventailltd/translate:20230301 php cli.php report "/app/var/translations" "/app/
 ```
 
 ### Import from Google Spreadsheet
-1. Create `keys` folder and create Google credentials json file.
+1. Create `keys` folder and add Google credentials json file.
 2. Create `export` folder (This folder will contain the language json files.)
 3. Customize and Run the following script:
 ```
