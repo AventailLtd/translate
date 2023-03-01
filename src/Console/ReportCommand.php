@@ -65,7 +65,7 @@ class ReportCommand extends Command
         $allLanguageKeys = [];
         foreach (explode(',', $input->getArgument(static::ARGUMENT_SCAN_DIRS)) as $path) {
             if ($output->isVerbose()) {
-                $output->writeln('Scan language keys in: ' . $path);
+                $output->writeln('Scan language keys in: ' . realpath($path));
             }
             $allLanguageKeys = array_unique(array_merge($allLanguageKeys, UsedKeys::scan($path)));
         }

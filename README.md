@@ -27,6 +27,16 @@ docker run -u 1000 --rm --tty \
 aventailltd/translate:20230301 php cli.php report "/app/var/translations" "/app/var/code,/app/var/code2" "/app/var/ignore_keys.json" --strict --verbose
 ```
 
+Example for GitLab CI:
+```
+lint:lang_check:
+  interruptible: true
+  stage: lint
+  image: aventailltd/translate:20230301
+  script:
+    - php /app/cli.php report "./src/messages/lang" "./src" "./src/messages/ignoreTranslateKeys.json" --strict --verbose
+```
+
 ### Import from Google Spreadsheet
 1. Create `keys` folder and add Google credentials json file.
 2. Create `export` folder (This folder will contain the language json files.)
