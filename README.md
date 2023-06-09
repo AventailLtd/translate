@@ -15,6 +15,7 @@
   - Vue JS (`v-t` and `$t()`) 
   - PHP (`lang()` function)
   - PHP Rain TPL (`|lang`)
+  - Laravel (`__()`)
 
 Example:
 ```
