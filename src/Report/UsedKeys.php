@@ -14,7 +14,9 @@ class UsedKeys
 
     public const RULES = [
         self::TYPE_VUE => [
-            '/\\$t\\(\'(?<key>[^\']{0,255})\'\\)/',
+            // $t('test') OR $t('test2', { obj1: 123 })
+            '/\$t\(\s*\'(?<key>[^\']{0,255})\'\s*(?:,\s*\{.*?\})?\s*\)/',
+            // v-t="test"
             '/v-t="\'(?<key>[^"]{0,255})\'"/',
         ],
         self::TYPE_PHP => [
