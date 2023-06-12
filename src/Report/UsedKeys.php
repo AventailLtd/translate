@@ -21,7 +21,10 @@ class UsedKeys
         ],
         self::TYPE_PHP => [
             '/lang\\(\'(?<key>[^\']{0,255})\'(,\s*[^\\)]+)?\\)/',
+            // laravel translate method.
             '/__\\(\'(?<key>[^\']{0,255})\'/',
+            // custom translate method.
+            '/translateWithMarkers\\(\'(?<key>[^\']{0,255})\'/'
         ],
         self::TYPE_PHP_RAIN_TPL => [
             '/\\{\'(?<key>[^\']+)\'\\|lang(:.+)?\\}/',
