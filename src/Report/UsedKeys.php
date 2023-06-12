@@ -21,7 +21,10 @@ class UsedKeys
         ],
         self::TYPE_PHP => [
             '/lang\\(\'(?<key>[^\']{0,255})\'(,\s*[^\\)]+)?\\)/',
+            // laravel lang függvénye.
             '/__\\(\'(?<key>[^\']{0,255})\'/',
+            // skeletonban használt lang függvény.
+            '/translateWithMarkers\\(\'(?<key>[^\']{0,255})\'/'
         ],
         self::TYPE_PHP_RAIN_TPL => [
             '/\\{\'(?<key>[^\']+)\'\\|lang(:.+)?\\}/',
