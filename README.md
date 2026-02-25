@@ -84,6 +84,14 @@ chmod 600 var/keys/YourGoogleCredentials.json
 ```bash
 docker compose run --rm -u 1000 php php cli.php import:google-spreadsheet "1a3bVZkaGq5R631LTDx7hOGsdIA4LuxlHVl-pWNFE1J4" "A3:F" "hu,en,de,ro,ru"
 ```
+
+6. Validate language files / missing translations
+
+# TODO: docker-compose.yml you have to set up volumes for this to work!
+
+
+    docker compose exec -u 1000 -e 'APP_ENV=prod' php php cli.php report '/app/var/translations' '/app/var/code' '/app/var/ignoreTranslateKeys.json' --strict --verbose
+
 ## PHP CS Fixer
 
 ```bash

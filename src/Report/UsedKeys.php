@@ -34,7 +34,7 @@ class UsedKeys
     ];
 
     public const array FILETYPE_PATTERNS = [
-        self::TYPE_VUE => ['*.vue', '*.js'],
+        self::TYPE_VUE => ['*.vue', '*.js', '*.ts'],
         self::TYPE_PHP => ['*.php'],
         self::TYPE_PHP_RAIN_TPL => ['*.html'],
     ];

@@ -9,3 +9,7 @@ services:
     volumes:
       - ./_docker/php/dev/base.ini:/usr/local/etc/php/conf.d/base.ini
       - ./:/app
+# set .env and uncomoment if you want to develop the translation check feature
+#      - "${PROJECT_PATH}/src/messages/lang:/app/var/translations"
+#      - "${PROJECT_PATH}/src:/app/var/code"
+#      - "${PROJECT_PATH}/src/messages/ignoreTranslateKeys.json:/app/var/ignoreTranslateKeys.json"

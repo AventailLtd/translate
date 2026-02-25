@@ -18,7 +18,7 @@ class ImportFromGoogleSpreadSheetCommand extends Command
     protected static $defaultName = 'import:google-spreadsheet';
     protected static $defaultDescription = 'Import translate keys from Google Spreadsheets';
 
-    public function __construct(protected Settings $settings, string $name = null)
+    public function __construct(protected Settings $settings, ?string $name = null)
     {
         parent::__construct($name);
     }
