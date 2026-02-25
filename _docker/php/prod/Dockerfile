@@ -1,4 +1,5 @@
-FROM composer:latest as composer_stage
+# https://hub.docker.com/_/composer 2026-02-25
+FROM composer:2.9.5 as composer_stage
 
 WORKDIR /app
 
@@ -7,7 +8,7 @@ COPY composer.json /app
 
 RUN composer install --ignore-platform-reqs --prefer-dist --no-scripts --no-progress --no-interaction --no-dev
 
-FROM php:8.2-fpm-bullseye
+FROM php:8.4-fpm-bullseye
 
 WORKDIR /app
 
@@ -45,5 +46,3 @@ VOLUME /app/var/export
 ARG wwwdatauid=1000
 RUN usermod -u $wwwdatauid www-data
 RUN chown -R www-data:www-data /app
-
-

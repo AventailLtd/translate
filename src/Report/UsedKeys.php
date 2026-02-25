@@ -8,14 +8,16 @@ use Symfony\Component\Finder\Finder;
 
 class UsedKeys
 {
-    public const TYPE_VUE = 'vue';
-    public const TYPE_PHP = 'php';
-    public const TYPE_PHP_RAIN_TPL = 'rain_tpl';
+    public const string TYPE_VUE = 'vue';
+    public const string TYPE_PHP = 'php';
+    public const string TYPE_PHP_RAIN_TPL = 'rain_tpl';
 
-    public const RULES = [
+    public const array RULES = [
         self::TYPE_VUE => [
             // $t('test') OR $t('test2', { obj1: 123 })
             '/\$t\(\s*\'(?<key>[^\']{0,255})\'\s*(?:,\s*\{[\s\S]*?\})?\s*\)/',
+            // t('test') OR t('test2', { obj1: 123 }) - but not $t() or something_t()
+            '/(?<![\w$])t\(\s*\'(?<key>[^\']{0,255})\'\s*(?:,\s*\{[\s\S]*?\})?\s*\)/',
             // v-t="test"
             '/v-t="\'(?<key>[^"]{0,255})\'"/',
         ],
@@ -24,14 +26,14 @@ class UsedKeys
             // laravel translate method.
             '/__\\(\'(?<key>[^\']{0,255})\'/',
             // custom translate method.
-            '/translateWithMarkers\\(\'(?<key>[^\']{0,255})\'/'
+            '/translateWithMarkers\\(\'(?<key>[^\']{0,255})\'/',
         ],
         self::TYPE_PHP_RAIN_TPL => [
             '/\\{\'(?<key>[^\']+)\'\\|lang(:.+)?\\}/',
         ],
     ];
 
-    public const TYPE_PATTERNS = [
+    public const array FILETYPE_PATTERNS = [
         self::TYPE_VUE => ['*.vue', '*.js'],
         self::TYPE_PHP => ['*.php'],
         self::TYPE_PHP_RAIN_TPL => ['*.html'],
@@ -41,14 +43,14 @@ class UsedKeys
      * Collect used keys of path
      *
      * @param string $path
-     * @return array
+     * @return string[]
      */
     public static function scan(string $path): array
     {
         $finder = new Finder();
 
         $usedKeys = [];
-        foreach (static::TYPE_PATTERNS as $type => $pattern) {
+        foreach (static::FILETYPE_PATTERNS as $type => $pattern) {
             foreach ($finder->files()->name($pattern)->in($path) as $file) {
                 foreach (static::RULES[$type] as $rule) {
                     if (preg_match_all($rule, $file->getContents(), $matches)) {

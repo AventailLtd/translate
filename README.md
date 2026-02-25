@@ -60,13 +60,13 @@ cp _env/php.example.env _env/php.env
 
 2. Install dependencies
 ```bash
-docker-compose run --rm -u 1000 php composer install
+docker compose run --rm -u 1000 php composer install
 ```
 
 3. Start containers
 
 ```bash 
-docker-compose up -d
+docker compose up -d
 ```
 
 4. Create keys folder and copy keys
@@ -82,13 +82,13 @@ chmod 600 var/keys/YourGoogleCredentials.json
 5. Try import from Google Spreadsheet
 
 ```bash
-docker-compose run --rm -u 1000 php php cli.php import:google-spreadsheet "1a3bVZkaGq5R631LTDx7hOGsdIA4LuxlHVl-pWNFE1J4" "A3:F" "hu,en,de,ro,ru"
+docker compose run --rm -u 1000 php php cli.php import:google-spreadsheet "1a3bVZkaGq5R631LTDx7hOGsdIA4LuxlHVl-pWNFE1J4" "A3:F" "hu,en,de,ro,ru"
 ```
 ## PHP CS Fixer
 
 ```bash
-docker-compose exec -u 1000 php bash
-PHP_CS_FIXER_IGNORE_ENV=8.2.3 php ./vendor/bin/php-cs-fixer fix --diff --dry-run --config .php-cs-fixer.php --verbose
+docker compose exec -u 1000 php bash
+php ./vendor/bin/php-cs-fixer fix --diff --dry-run --config .php-cs-fixer.php --verbose
 ```
 
 ## Build prod image

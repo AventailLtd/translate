@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-bullseye
+FROM php:8.4-fpm-bullseye
 
 # Install composer in image
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
