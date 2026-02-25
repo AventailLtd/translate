@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/composer 2026-02-25
-FROM composer:2.9.5 as composer_stage
+FROM composer:2.9.5 AS composer_stage
 
 WORKDIR /app
 
